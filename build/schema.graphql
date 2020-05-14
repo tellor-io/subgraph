@@ -1,0 +1,8 @@
+type Dispute @entity {
+  id: ID!
+  count: BigInt!
+  miner: Bytes! # address
+  disputeId: BigInt!
+  requestId: BigInt!
+  timestamp: BigInt!
+}

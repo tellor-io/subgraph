@@ -1,0 +1,44 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: mainnet
+    source:
+      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
+      abi: Contract
+      startBlock: 8265520
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - NewTellorAddress
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: NewTellorAddress(address)
+          handler: handleNewTellorAddress
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: Dispute
+    network: mainnet
+    source:
+      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
+      abi: DisputeContract
+      startBlock: 8265520
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - NewTellorAddress
+      abis:
+        - name: DisputeContract
+          file: ./abis/TellorDispute.json
+      eventHandlers:
+        - event: NewDispute(indexed uint256,indexed uint256,uint256,address)
+          handler: handleNewDispute
+      file: ./src/mapping.ts
