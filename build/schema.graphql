@@ -1,8 +1,56 @@
+type Request @entity {
+  id: ID!
+  timestamp: BigInt!
+  requestId: BigInt!
+  sender: Bytes!
+  query: String!
+  querySymbol: String!
+  granularity: BigInt!
+  totalTips: BigInt!
+  miningEvents: [MiningEvent!] @derivedFrom(field: "request")
+}
+
+type MiningEvent @entity {
+  id: ID!
+  timestamp: BigInt!
+  requestId: BigInt!
+  request: Request!
+  time: BigInt!
+  minedValue: BigInt!
+  totalTips: BigInt!
+  currentChallenge: Bytes!
+  minerValues: [MinerValue!] @derivedFrom(field: "miningEvent")
+}
+
+type MinerValue @entity {
+  id: ID!
+  timestamp: BigInt!
+  requestId: BigInt!
+  currentChallenge: Bytes!
+  miningEvent: MiningEvent!
+  miner: Bytes!
+  nonce: String!
+  value: BigInt!
+}
+
 type Dispute @entity {
   id: ID!
-  count: BigInt!
-  miner: Bytes! # address
+  miner: Bytes!
   disputeId: BigInt!
   requestId: BigInt!
+  result: BigInt
+  reportedMiner: Bytes
+  reportingParty: Bytes
+  active: Boolean
+  timestamp: BigInt!
+  votes: [Vote!] @derivedFrom(field: "dispute")
+}
+
+type Vote @entity {
+  id: ID!
+  dispute: Dispute!
+  disputeId: BigInt!
+  position: Boolean!
+  voter: Bytes!
   timestamp: BigInt!
 }
