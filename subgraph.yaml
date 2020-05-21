@@ -48,6 +48,32 @@ dataSources:
           handler: handleDisputeVoteTallied
       file: ./src/mapping.ts
   - kind: ethereum/contract
+    name: LibraryEvents
+    network: mainnet
+    source:
+      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
+      abi: LibraryContract
+      # startBlock: 8265520
+      # stat with a newer block for speed in dev
+      startBlock: 10110100
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Request
+      abis:
+        - name: LibraryContract
+          file: ./abis/TellorLibrary.json
+      eventHandlers:
+        # - event: DataRequested(indexed address,string,string,uint256,indexed uint256,uint256)
+        #   handler: handleDataRequested
+        - event: NewValue(indexed uint256,uint256,uint256,uint256,bytes32)
+          handler: handleNewValue
+        - event: NonceSubmitted(indexed address,string,indexed uint256,uint256,bytes32)
+          handler: handleNonceSubmitted
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
     name: Library
     network: mainnet
     source:
@@ -66,8 +92,4 @@ dataSources:
       eventHandlers:
         - event: DataRequested(indexed address,string,string,uint256,indexed uint256,uint256)
           handler: handleDataRequested
-        - event: NewValue(indexed uint256,uint256,uint256,uint256,bytes32)
-          handler: handleNewValue
-        - event: NonceSubmitted(indexed address,string,indexed uint256,uint256,bytes32)
-          handler: handleNonceSubmitted
       file: ./src/mapping.ts

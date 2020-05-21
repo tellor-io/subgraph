@@ -216,6 +216,15 @@ export class MiningEvent extends Entity {
     this.set("currentChallenge", Value.fromBytes(value));
   }
 
+  get blockHash(): Bytes {
+    let value = this.get("blockHash");
+    return value.toBytes();
+  }
+
+  set blockHash(value: Bytes) {
+    this.set("blockHash", Value.fromBytes(value));
+  }
+
   get minerValues(): Array<string> | null {
     let value = this.get("minerValues");
     if (value === null) {
@@ -309,13 +318,13 @@ export class MinerValue extends Entity {
     this.set("miner", Value.fromBytes(value));
   }
 
-  get nonce(): string {
-    let value = this.get("nonce");
-    return value.toString();
+  get blockHash(): Bytes {
+    let value = this.get("blockHash");
+    return value.toBytes();
   }
 
-  set nonce(value: string) {
-    this.set("nonce", Value.fromString(value));
+  set blockHash(value: Bytes) {
+    this.set("blockHash", Value.fromBytes(value));
   }
 
   get value(): BigInt {

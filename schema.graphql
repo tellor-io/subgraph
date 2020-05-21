@@ -19,6 +19,7 @@ type MiningEvent @entity {
   minedValue: BigInt!
   totalTips: BigInt!
   currentChallenge: Bytes!
+  blockHash: Bytes!
   minerValues: [MinerValue!] @derivedFrom(field: "miningEvent")
 }
 
@@ -29,7 +30,8 @@ type MinerValue @entity {
   currentChallenge: Bytes!
   miningEvent: MiningEvent!
   miner: Bytes!
-  nonce: String!
+  blockHash: Bytes!
+  # nonce: String!
   value: BigInt!
 }
 

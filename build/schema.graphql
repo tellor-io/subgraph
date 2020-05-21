@@ -29,7 +29,7 @@ type MinerValue @entity {
   currentChallenge: Bytes!
   miningEvent: MiningEvent!
   miner: Bytes!
-  nonce: String!
+  # nonce: String!
   value: BigInt!
 }
 

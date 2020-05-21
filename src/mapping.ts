@@ -9,10 +9,11 @@ import {
 import {
   LibraryContract,
   DataRequested,
-  NewChallenge,
+} from "../generated/Library/LibraryContract";
+import {
   NewValue,
   NonceSubmitted,
-} from "../generated/Library/LibraryContract";
+} from "../generated/LibraryEvents/LibraryContract";
 import {
   Dispute,
   Vote,
@@ -36,9 +37,17 @@ export function handleDataRequested(event: DataRequested): void {
 
 // event NewValue(uint256 indexed _requestId, uint256 _time, uint256 _value, uint256 _totalTips, bytes32 _currentChallenge);
 export function handleNewValue(event: NewValue): void {
-  let miningEvent = new MiningEvent(
-    event.params._currentChallenge.toHexString()
-  );
+  // maybe we should forget currentChallenge bytes
+  // let miningEvent = new MiningEvent(
+  //   event.params._currentChallenge.toHexString()
+  // );
+
+  let miningEventId = event.block.hash
+    .toHexString()
+    .concat("-event-")
+    .concat(event.params._requestId.toString());
+
+  let miningEvent = new MiningEvent(miningEventId);
   miningEvent.timestamp = event.block.timestamp;
   miningEvent.requestId = event.params._requestId;
   miningEvent.request = event.params._requestId.toString();
@@ -46,24 +55,41 @@ export function handleNewValue(event: NewValue): void {
   miningEvent.minedValue = event.params._value;
   miningEvent.totalTips = event.params._totalTips;
   miningEvent.currentChallenge = event.params._currentChallenge;
+  miningEvent.blockHash = event.block.hash;
 
   miningEvent.save();
 }
 
 // event NonceSubmitted(address indexed _miner, string _nonce, uint256 indexed _requestId, uint256 _value, bytes32 _currentChallenge);
 export function handleNonceSubmitted(event: NonceSubmitted): void {
-  let valueId = event.params._currentChallenge
+  // let valueId = event.params._currentChallenge
+  //   .toHexString()
+  //   .concat("-value-")
+  //   .concat(event.params._miner.toHexString());
+
+  let valueId = event.block.hash
     .toHexString()
     .concat("-value-")
+    .concat(event.params._requestId.toString())
+    .concat("-")
     .concat(event.params._miner.toHexString());
+
+  let miningEventId = event.block.hash
+    .toHexString()
+    .concat("-event-")
+    .concat(event.params._requestId.toString());
+
   let value = new MinerValue(valueId);
   value.timestamp = event.block.timestamp;
   value.requestId = event.params._requestId;
   value.currentChallenge = event.params._currentChallenge;
-  value.miningEvent = event.params._currentChallenge.toHexString();
+  // value.miningEvent = event.params._currentChallenge.toHexString();
+  value.miningEvent = miningEventId;
   value.miner = event.params._miner;
-  value.nonce = event.params._nonce;
+  // value.nonce = event.params._nonce;
   value.value = event.params._value;
+  value.blockHash = event.block.hash;
+
   value.save();
 }
 
