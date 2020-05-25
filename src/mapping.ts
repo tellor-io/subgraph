@@ -42,8 +42,8 @@ export function handleNewValue(event: NewValue): void {
   //   event.params._currentChallenge.toHexString()
   // );
 
-  let miningEventId = event.block.hash
-    .toHexString()
+  let miningEventId = event.block.number
+    .toString()
     .concat("-event-")
     .concat(event.params._requestId.toString());
 
@@ -55,27 +55,22 @@ export function handleNewValue(event: NewValue): void {
   miningEvent.minedValue = event.params._value;
   miningEvent.totalTips = event.params._totalTips;
   miningEvent.currentChallenge = event.params._currentChallenge;
-  miningEvent.blockHash = event.block.hash;
+  miningEvent.blockNumber = event.block.number;
 
   miningEvent.save();
 }
 
 // event NonceSubmitted(address indexed _miner, string _nonce, uint256 indexed _requestId, uint256 _value, bytes32 _currentChallenge);
 export function handleNonceSubmitted(event: NonceSubmitted): void {
-  // let valueId = event.params._currentChallenge
-  //   .toHexString()
-  //   .concat("-value-")
-  //   .concat(event.params._miner.toHexString());
-
-  let valueId = event.block.hash
-    .toHexString()
+  let valueId = event.block.number
+    .toString()
     .concat("-value-")
     .concat(event.params._requestId.toString())
     .concat("-")
     .concat(event.params._miner.toHexString());
 
-  let miningEventId = event.block.hash
-    .toHexString()
+  let miningEventId = event.block.number
+    .toString()
     .concat("-event-")
     .concat(event.params._requestId.toString());
 
@@ -83,22 +78,25 @@ export function handleNonceSubmitted(event: NonceSubmitted): void {
   value.timestamp = event.block.timestamp;
   value.requestId = event.params._requestId;
   value.currentChallenge = event.params._currentChallenge;
-  // value.miningEvent = event.params._currentChallenge.toHexString();
   value.miningEvent = miningEventId;
   value.miner = event.params._miner;
-  // value.nonce = event.params._nonce;
   value.value = event.params._value;
-  value.blockHash = event.block.hash;
+  value.blockNumber = event.block.number;
 
   value.save();
 }
 
 export function handleNewDispute(event: NewDispute): void {
+  let contract = Contract.bind(event.address);
+  let disputeVars = contract.getAllDisputeVars(event.params._disputeId);
+
   let dispute = new Dispute(event.params._disputeId.toString());
   dispute.disputeId = event.params._disputeId;
   dispute.miner = event.params._miner;
   dispute.requestId = event.params._requestId;
   dispute.timestamp = event.params._timestamp;
+
+  dispute.relatedMiningEventData = disputeVars.value7;
 
   dispute.save();
 }

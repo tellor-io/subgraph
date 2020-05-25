@@ -19,6 +19,7 @@ type MiningEvent @entity {
   minedValue: BigInt!
   totalTips: BigInt!
   currentChallenge: Bytes!
+  blockNumber: BigInt!
   minerValues: [MinerValue!] @derivedFrom(field: "miningEvent")
 }
 
@@ -29,7 +30,7 @@ type MinerValue @entity {
   currentChallenge: Bytes!
   miningEvent: MiningEvent!
   miner: Bytes!
-  # nonce: String!
+  blockNumber: BigInt!
   value: BigInt!
 }
 
@@ -43,6 +44,9 @@ type Dispute @entity {
   reportingParty: Bytes
   active: Boolean
   timestamp: BigInt!
+  relatedMiningEventData: [BigInt!]
+  #relatedMiningEventBlock: BigInt!
+  #relatedMiningEventValue: BigInt!
   votes: [Vote!] @derivedFrom(field: "dispute")
 }
 

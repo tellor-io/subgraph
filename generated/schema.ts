@@ -216,13 +216,13 @@ export class MiningEvent extends Entity {
     this.set("currentChallenge", Value.fromBytes(value));
   }
 
-  get blockHash(): Bytes {
-    let value = this.get("blockHash");
-    return value.toBytes();
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
   }
 
-  set blockHash(value: Bytes) {
-    this.set("blockHash", Value.fromBytes(value));
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
   }
 
   get minerValues(): Array<string> | null {
@@ -318,13 +318,13 @@ export class MinerValue extends Entity {
     this.set("miner", Value.fromBytes(value));
   }
 
-  get blockHash(): Bytes {
-    let value = this.get("blockHash");
-    return value.toBytes();
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
   }
 
-  set blockHash(value: Bytes) {
-    this.set("blockHash", Value.fromBytes(value));
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
   }
 
   get value(): BigInt {
@@ -461,6 +461,26 @@ export class Dispute extends Entity {
 
   set timestamp(value: BigInt) {
     this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get relatedMiningEventData(): Array<BigInt> | null {
+    let value = this.get("relatedMiningEventData");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigIntArray();
+    }
+  }
+
+  set relatedMiningEventData(value: Array<BigInt> | null) {
+    if (value === null) {
+      this.unset("relatedMiningEventData");
+    } else {
+      this.set(
+        "relatedMiningEventData",
+        Value.fromBigIntArray(value as Array<BigInt>)
+      );
+    }
   }
 
   get votes(): Array<string> | null {
