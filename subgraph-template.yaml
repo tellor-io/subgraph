@@ -1,14 +1,17 @@
 specVersion: 0.0.2
 schema:
-  file: schema.graphql
+  file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Contract
-    network: rinkeby
+    # network: rinkeby
+    network: mainnet
     source:
-      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      # address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
       abi: Contract
-      startBlock: 6051612
+      # startBlock: 6051612
+      startBlock: 8265520
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -17,18 +20,21 @@ dataSources:
         - NewTellorAddress
       abis:
         - name: Contract
-          file: Contract/abis/Contract.json
+          file: ./abis/Contract.json
       eventHandlers:
         - event: NewTellorAddress(address)
           handler: handleNewTellorAddress
-      file: Contract/Contract.wasm
+      file: ./src/mapping.ts
   - kind: ethereum/contract
     name: Dispute
-    network: rinkeby
+    # network: rinkeby
+    network: mainnet
     source:
-      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      # address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
       abi: DisputeContract
-      startBlock: 6051612
+      # startBlock: 6051612
+      startBlock: 8265520
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -38,9 +44,9 @@ dataSources:
         - Vote
       abis:
         - name: Contract
-          file: Dispute/abis/Contract.json
+          file: ./abis/Contract.json
         - name: DisputeContract
-          file: Dispute/abis/TellorDispute.json
+          file: ./abis/TellorDispute.json
       eventHandlers:
         - event: NewDispute(indexed uint256,indexed uint256,uint256,address)
           handler: handleNewDispute
@@ -48,14 +54,17 @@ dataSources:
           handler: handleVoted
         - event: DisputeVoteTallied(indexed uint256,int256,indexed address,address,bool)
           handler: handleDisputeVoteTallied
-      file: Contract/Contract.wasm
+      file: ./src/mapping.ts
   - kind: ethereum/contract
     name: LibraryEvents
-    network: rinkeby
+    # network: rinkeby
+    network: mainnet
     source:
-      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      # address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
       abi: LibraryContract
-      startBlock: 6051612
+      # startBlock: 6051612
+      startBlock: 8265520
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -64,7 +73,7 @@ dataSources:
         - Request
       abis:
         - name: LibraryContract
-          file: LibraryEvents/abis/TellorLibrary.json
+          file: ./abis/TellorLibrary.json
       eventHandlers:
         - event: DataRequested(indexed address,string,string,uint256,indexed uint256,uint256)
           handler: handleDataRequested
@@ -72,4 +81,4 @@ dataSources:
           handler: handleNewValue
         - event: NonceSubmitted(indexed address,string,indexed uint256,uint256,bytes32)
           handler: handleNonceSubmitted
-      file: Contract/Contract.wasm
+      file: ./src/mapping.ts

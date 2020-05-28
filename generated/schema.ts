@@ -121,6 +121,23 @@ export class Request extends Entity {
       this.set("miningEvents", Value.fromStringArray(value as Array<string>));
     }
   }
+
+  get disputes(): Array<string> | null {
+    let value = this.get("disputes");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set disputes(value: Array<string> | null) {
+    if (value === null) {
+      this.unset("disputes");
+    } else {
+      this.set("disputes", Value.fromStringArray(value as Array<string>));
+    }
+  }
 }
 
 export class MiningEvent extends Entity {
@@ -300,13 +317,30 @@ export class MinerValue extends Entity {
     this.set("currentChallenge", Value.fromBytes(value));
   }
 
-  get miningEvent(): string {
+  get miningEvent(): string | null {
     let value = this.get("miningEvent");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set miningEvent(value: string | null) {
+    if (value === null) {
+      this.unset("miningEvent");
+    } else {
+      this.set("miningEvent", Value.fromString(value as string));
+    }
+  }
+
+  get miningEventId(): string {
+    let value = this.get("miningEventId");
     return value.toString();
   }
 
-  set miningEvent(value: string) {
-    this.set("miningEvent", Value.fromString(value));
+  set miningEventId(value: string) {
+    this.set("miningEventId", Value.fromString(value));
   }
 
   get miner(): Bytes {
@@ -394,6 +428,15 @@ export class Dispute extends Entity {
     this.set("requestId", Value.fromBigInt(value));
   }
 
+  get request(): string {
+    let value = this.get("request");
+    return value.toString();
+  }
+
+  set request(value: string) {
+    this.set("request", Value.fromString(value));
+  }
+
   get result(): BigInt | null {
     let value = this.get("result");
     if (value === null) {
@@ -452,6 +495,32 @@ export class Dispute extends Entity {
 
   set active(value: boolean) {
     this.set("active", Value.fromBoolean(value));
+  }
+
+  get disputeVotePassed(): boolean {
+    let value = this.get("disputeVotePassed");
+    return value.toBoolean();
+  }
+
+  set disputeVotePassed(value: boolean) {
+    this.set("disputeVotePassed", Value.fromBoolean(value));
+  }
+
+  get tally(): BigInt | null {
+    let value = this.get("tally");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set tally(value: BigInt | null) {
+    if (value === null) {
+      this.unset("tally");
+    } else {
+      this.set("tally", Value.fromBigInt(value as BigInt));
+    }
   }
 
   get timestamp(): BigInt {

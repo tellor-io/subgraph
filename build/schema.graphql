@@ -8,6 +8,7 @@ type Request @entity {
   granularity: BigInt!
   totalTips: BigInt!
   miningEvents: [MiningEvent!] @derivedFrom(field: "request")
+  disputes: [Dispute!] @derivedFrom(field: "request")
 }
 
 type MiningEvent @entity {
@@ -28,7 +29,8 @@ type MinerValue @entity {
   timestamp: BigInt!
   requestId: BigInt!
   currentChallenge: Bytes!
-  miningEvent: MiningEvent!
+  miningEvent: MiningEvent
+  miningEventId: String!
   miner: Bytes!
   blockNumber: BigInt!
   value: BigInt!
@@ -39,14 +41,15 @@ type Dispute @entity {
   miner: Bytes!
   disputeId: BigInt!
   requestId: BigInt!
+  request: Request!
   result: BigInt
   reportedMiner: Bytes
   reportingParty: Bytes
   active: Boolean
+  disputeVotePassed: Boolean
+  tally: BigInt
   timestamp: BigInt!
   relatedMiningEventData: [BigInt!]
-  #relatedMiningEventBlock: BigInt!
-  #relatedMiningEventValue: BigInt!
   votes: [Vote!] @derivedFrom(field: "dispute")
 }
 

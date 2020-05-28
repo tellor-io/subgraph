@@ -37,13 +37,10 @@ export function handleDataRequested(event: DataRequested): void {
 
 // event NewValue(uint256 indexed _requestId, uint256 _time, uint256 _value, uint256 _totalTips, bytes32 _currentChallenge);
 export function handleNewValue(event: NewValue): void {
-  // maybe we should forget currentChallenge bytes
-  // let miningEvent = new MiningEvent(
-  //   event.params._currentChallenge.toHexString()
-  // );
-
-  let miningEventId = event.block.number
-    .toString()
+  // TODO try to HexString?
+  let miningEventId = event.params._currentChallenge
+    // .toString()
+    .toHex()
     .concat("-event-")
     .concat(event.params._requestId.toString());
 
@@ -62,15 +59,17 @@ export function handleNewValue(event: NewValue): void {
 
 // event NonceSubmitted(address indexed _miner, string _nonce, uint256 indexed _requestId, uint256 _value, bytes32 _currentChallenge);
 export function handleNonceSubmitted(event: NonceSubmitted): void {
-  let valueId = event.block.number
-    .toString()
+  // TODO try to Hex?
+  let valueId = event.params._currentChallenge
+    // .toString()
+    .toHex()
     .concat("-value-")
     .concat(event.params._requestId.toString())
     .concat("-")
     .concat(event.params._miner.toHexString());
 
-  let miningEventId = event.block.number
-    .toString()
+  let miningEventId = event.params._currentChallenge
+    .toHex()
     .concat("-event-")
     .concat(event.params._requestId.toString());
 
@@ -79,6 +78,7 @@ export function handleNonceSubmitted(event: NonceSubmitted): void {
   value.requestId = event.params._requestId;
   value.currentChallenge = event.params._currentChallenge;
   value.miningEvent = miningEventId;
+  value.miningEventId = miningEventId;
   value.miner = event.params._miner;
   value.value = event.params._value;
   value.blockNumber = event.block.number;
@@ -96,13 +96,21 @@ export function handleNewDispute(event: NewDispute): void {
   dispute.requestId = event.params._requestId;
   dispute.timestamp = event.params._timestamp;
 
+  dispute.request = event.params._requestId.toString();
+
+  dispute.disputeVotePassed = disputeVars.value2;
   dispute.relatedMiningEventData = disputeVars.value7;
+  dispute.tally = disputeVars.value8;
 
   dispute.save();
 }
 
 // event Voted(uint256 indexed _disputeID, bool _position, address indexed _voter);
 export function handleVoted(event: Voted): void {
+  let contract = Contract.bind(event.address);
+  let disputeVars = contract.getAllDisputeVars(event.params._disputeID);
+  let dispute = Dispute.load(event.params._disputeID.toString());
+
   let voteId = event.params._disputeID
     .toString()
     .concat("-vote-")
@@ -116,10 +124,18 @@ export function handleVoted(event: Voted): void {
   vote.timestamp = event.block.timestamp;
 
   vote.save();
+
+  dispute.disputeVotePassed = disputeVars.value2;
+  dispute.relatedMiningEventData = disputeVars.value7;
+  dispute.tally = disputeVars.value8;
+
+  dispute.save();
 }
 
 // event DisputeVoteTallied(uint256 indexed _disputeID, int256 _result, address indexed _reportedMiner, address _reportingParty, bool _active);
 export function handleDisputeVoteTallied(event: DisputeVoteTallied): void {
+  let contract = Contract.bind(event.address);
+  let disputeVars = contract.getAllDisputeVars(event.params._disputeID);
   let dispute = Dispute.load(event.params._disputeID.toString());
 
   dispute.result = event.params._result;
