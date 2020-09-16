@@ -4,6 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "deploy-tellor": "node scripts/deploy-prep.js mainnet && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ tellor-io/tellor-dispute",
     "deploy-main": "node scripts/deploy-prep.js mainnet && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ skuhlmann/tellor-playground",
     "deploy-rinkeby": "node scripts/deploy-prep.js rinkeby && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ skuhlmann/tellor-playground-rinkeby",
     "create-local": "graph create --node http://localhost:8020/ skuhlmann/tellor-playground",

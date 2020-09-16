@@ -98,17 +98,13 @@ export function handleNewDispute(event: NewDispute): void {
 
   dispute.request = event.params._requestId.toString();
 
-  dispute.disputeVotePassed = disputeVars.value2;
   dispute.relatedMiningEventData = disputeVars.value7;
-  dispute.tally = disputeVars.value8;
 
   dispute.save();
 }
 
 // event Voted(uint256 indexed _disputeID, bool _position, address indexed _voter);
 export function handleVoted(event: Voted): void {
-  let contract = Contract.bind(event.address);
-  let disputeVars = contract.getAllDisputeVars(event.params._disputeID);
   let dispute = Dispute.load(event.params._disputeID.toString());
 
   let voteId = event.params._disputeID
@@ -125,10 +121,6 @@ export function handleVoted(event: Voted): void {
 
   vote.save();
 
-  dispute.disputeVotePassed = disputeVars.value2;
-  dispute.relatedMiningEventData = disputeVars.value7;
-  dispute.tally = disputeVars.value8;
-
   dispute.save();
 }
 
@@ -142,6 +134,10 @@ export function handleDisputeVoteTallied(event: DisputeVoteTallied): void {
   dispute.reportedMiner = event.params._reportedMiner;
   dispute.reportingParty = event.params._reportingParty;
   dispute.active = event.params._active;
+
+  dispute.disputeVotePassed = disputeVars.value2;
+  dispute.relatedMiningEventData = disputeVars.value7;
+  dispute.tally = disputeVars.value8;
 
   dispute.save();
 }
