@@ -121,6 +121,10 @@ export class Voted__Params {
   get _voter(): Address {
     return this._event.parameters[2].value.toAddress();
   }
+
+  get _voteWeight(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
 }
 
 export class DisputeContract extends SmartContract {

@@ -4,7 +4,7 @@ const yaml = require("js-yaml");
 const config = {
   rinkeby: {
     address: "0xfe41cb708cd98c5b20423433309e55b53f79134a",
-    startBlock: 6051612,
+    startBlock: 7208800,
   },
   mainnet: {
     address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5",

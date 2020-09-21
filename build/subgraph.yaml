@@ -3,32 +3,12 @@ schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Contract
-    network: rinkeby
-    source:
-      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
-      abi: Contract
-      startBlock: 6051612
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.3
-      language: wasm/assemblyscript
-      entities:
-        - NewTellorAddress
-      abis:
-        - name: Contract
-          file: Contract/abis/Contract.json
-      eventHandlers:
-        - event: NewTellorAddress(address)
-          handler: handleNewTellorAddress
-      file: Contract/Contract.wasm
-  - kind: ethereum/contract
     name: Dispute
     network: rinkeby
     source:
       address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
       abi: DisputeContract
-      startBlock: 6051612
+      startBlock: 7208800
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -41,35 +21,36 @@ dataSources:
           file: Dispute/abis/Contract.json
         - name: DisputeContract
           file: Dispute/abis/TellorDispute.json
+        - name: GettersContract
+          file: Dispute/abis/TellorGetters.json
       eventHandlers:
         - event: NewDispute(indexed uint256,indexed uint256,uint256,address)
           handler: handleNewDispute
-        - event: Voted(indexed uint256,bool,indexed address)
+        - event: Voted(indexed uint256,bool,indexed address,indexed uint256)
           handler: handleVoted
         - event: DisputeVoteTallied(indexed uint256,int256,indexed address,address,bool)
           handler: handleDisputeVoteTallied
-      file: Contract/Contract.wasm
+      file: Dispute/Dispute.wasm
   - kind: ethereum/contract
     name: LibraryEvents
     network: rinkeby
     source:
       address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
       abi: LibraryContract
-      startBlock: 6051612
+      startBlock: 7208800
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
-        - Request
+        - MiningEvent
+        - MinerValue
       abis:
         - name: LibraryContract
           file: LibraryEvents/abis/TellorLibrary.json
       eventHandlers:
-        - event: DataRequested(indexed address,string,string,uint256,indexed uint256,uint256)
-          handler: handleDataRequested
-        - event: NewValue(indexed uint256,uint256,uint256,uint256,bytes32)
+        - event: NewValue(uint256[5],uint256,uint256[5],uint256,indexed bytes32)
           handler: handleNewValue
-        - event: NonceSubmitted(indexed address,string,indexed uint256,uint256,bytes32)
+        - event: NonceSubmitted(indexed address,string,uint256[5],uint256[5],indexed bytes32)
           handler: handleNonceSubmitted
-      file: Contract/Contract.wasm
+      file: Dispute/Dispute.wasm

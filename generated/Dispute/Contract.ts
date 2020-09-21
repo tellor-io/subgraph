@@ -15,211 +15,47 @@ import {
   CallResult
 } from "@graphprotocol/graph-ts";
 
-export class NewTellorAddress extends EthereumEvent {
-  get params(): NewTellorAddress__Params {
-    return new NewTellorAddress__Params(this);
-  }
-}
-
-export class NewTellorAddress__Params {
-  _event: NewTellorAddress;
-
-  constructor(event: NewTellorAddress) {
-    this._event = event;
-  }
-
-  get _newTellor(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-}
-
-export class Contract__getVariablesOnDeckResult {
-  value0: BigInt;
-  value1: BigInt;
-  value2: string;
-
-  constructor(value0: BigInt, value1: BigInt, value2: string) {
-    this.value0 = value0;
-    this.value1 = value1;
-    this.value2 = value2;
-  }
-
-  toMap(): TypedMap<string, EthereumValue> {
-    let map = new TypedMap<string, EthereumValue>();
-    map.set("value0", EthereumValue.fromUnsignedBigInt(this.value0));
-    map.set("value1", EthereumValue.fromUnsignedBigInt(this.value1));
-    map.set("value2", EthereumValue.fromString(this.value2));
-    return map;
-  }
-}
-
-export class Contract__getLastNewValueByIdResult {
-  value0: BigInt;
-  value1: boolean;
-
-  constructor(value0: BigInt, value1: boolean) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-
-  toMap(): TypedMap<string, EthereumValue> {
-    let map = new TypedMap<string, EthereumValue>();
-    map.set("value0", EthereumValue.fromUnsignedBigInt(this.value0));
-    map.set("value1", EthereumValue.fromBoolean(this.value1));
-    return map;
-  }
-}
-
-export class Contract__getStakerInfoResult {
-  value0: BigInt;
-  value1: BigInt;
-
-  constructor(value0: BigInt, value1: BigInt) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-
-  toMap(): TypedMap<string, EthereumValue> {
-    let map = new TypedMap<string, EthereumValue>();
-    map.set("value0", EthereumValue.fromUnsignedBigInt(this.value0));
-    map.set("value1", EthereumValue.fromUnsignedBigInt(this.value1));
-    return map;
-  }
-}
-
-export class Contract__getCurrentVariablesResult {
+export class Contract__getNewCurrentVariablesResult {
   value0: Bytes;
-  value1: BigInt;
+  value1: Array<BigInt>;
   value2: BigInt;
-  value3: string;
-  value4: BigInt;
-  value5: BigInt;
-
-  constructor(
-    value0: Bytes,
-    value1: BigInt,
-    value2: BigInt,
-    value3: string,
-    value4: BigInt,
-    value5: BigInt
-  ) {
-    this.value0 = value0;
-    this.value1 = value1;
-    this.value2 = value2;
-    this.value3 = value3;
-    this.value4 = value4;
-    this.value5 = value5;
-  }
-
-  toMap(): TypedMap<string, EthereumValue> {
-    let map = new TypedMap<string, EthereumValue>();
-    map.set("value0", EthereumValue.fromFixedBytes(this.value0));
-    map.set("value1", EthereumValue.fromUnsignedBigInt(this.value1));
-    map.set("value2", EthereumValue.fromUnsignedBigInt(this.value2));
-    map.set("value3", EthereumValue.fromString(this.value3));
-    map.set("value4", EthereumValue.fromUnsignedBigInt(this.value4));
-    map.set("value5", EthereumValue.fromUnsignedBigInt(this.value5));
-    return map;
-  }
-}
-
-export class Contract__getAllDisputeVarsResult {
-  value0: Bytes;
-  value1: boolean;
-  value2: boolean;
-  value3: boolean;
-  value4: Address;
-  value5: Address;
-  value6: Address;
-  value7: Array<BigInt>;
-  value8: BigInt;
-
-  constructor(
-    value0: Bytes,
-    value1: boolean,
-    value2: boolean,
-    value3: boolean,
-    value4: Address,
-    value5: Address,
-    value6: Address,
-    value7: Array<BigInt>,
-    value8: BigInt
-  ) {
-    this.value0 = value0;
-    this.value1 = value1;
-    this.value2 = value2;
-    this.value3 = value3;
-    this.value4 = value4;
-    this.value5 = value5;
-    this.value6 = value6;
-    this.value7 = value7;
-    this.value8 = value8;
-  }
-
-  toMap(): TypedMap<string, EthereumValue> {
-    let map = new TypedMap<string, EthereumValue>();
-    map.set("value0", EthereumValue.fromFixedBytes(this.value0));
-    map.set("value1", EthereumValue.fromBoolean(this.value1));
-    map.set("value2", EthereumValue.fromBoolean(this.value2));
-    map.set("value3", EthereumValue.fromBoolean(this.value3));
-    map.set("value4", EthereumValue.fromAddress(this.value4));
-    map.set("value5", EthereumValue.fromAddress(this.value5));
-    map.set("value6", EthereumValue.fromAddress(this.value6));
-    map.set("value7", EthereumValue.fromUnsignedBigIntArray(this.value7));
-    map.set("value8", EthereumValue.fromSignedBigInt(this.value8));
-    return map;
-  }
-}
-
-export class Contract__getRequestVarsResult {
-  value0: string;
-  value1: string;
-  value2: Bytes;
   value3: BigInt;
-  value4: BigInt;
-  value5: BigInt;
 
   constructor(
-    value0: string,
-    value1: string,
-    value2: Bytes,
-    value3: BigInt,
-    value4: BigInt,
-    value5: BigInt
+    value0: Bytes,
+    value1: Array<BigInt>,
+    value2: BigInt,
+    value3: BigInt
   ) {
     this.value0 = value0;
     this.value1 = value1;
     this.value2 = value2;
     this.value3 = value3;
-    this.value4 = value4;
-    this.value5 = value5;
   }
 
   toMap(): TypedMap<string, EthereumValue> {
     let map = new TypedMap<string, EthereumValue>();
-    map.set("value0", EthereumValue.fromString(this.value0));
-    map.set("value1", EthereumValue.fromString(this.value1));
-    map.set("value2", EthereumValue.fromFixedBytes(this.value2));
+    map.set("value0", EthereumValue.fromFixedBytes(this.value0));
+    map.set("value1", EthereumValue.fromUnsignedBigIntArray(this.value1));
+    map.set("value2", EthereumValue.fromUnsignedBigInt(this.value2));
     map.set("value3", EthereumValue.fromUnsignedBigInt(this.value3));
-    map.set("value4", EthereumValue.fromUnsignedBigInt(this.value4));
-    map.set("value5", EthereumValue.fromUnsignedBigInt(this.value5));
     return map;
   }
 }
 
-export class Contract__getLastNewValueResult {
-  value0: BigInt;
-  value1: boolean;
+export class Contract__getNewVariablesOnDeckResult {
+  value0: Array<BigInt>;
+  value1: Array<BigInt>;
 
-  constructor(value0: BigInt, value1: boolean) {
+  constructor(value0: Array<BigInt>, value1: Array<BigInt>) {
     this.value0 = value0;
     this.value1 = value1;
   }
 
   toMap(): TypedMap<string, EthereumValue> {
     let map = new TypedMap<string, EthereumValue>();
-    map.set("value0", EthereumValue.fromUnsignedBigInt(this.value0));
-    map.set("value1", EthereumValue.fromBoolean(this.value1));
+    map.set("value0", EthereumValue.fromUnsignedBigIntArray(this.value0));
+    map.set("value1", EthereumValue.fromUnsignedBigIntArray(this.value1));
     return map;
   }
 }
@@ -229,458 +65,18 @@ export class Contract extends SmartContract {
     return new Contract("Contract", address);
   }
 
-  getRequestIdByTimestamp(_timestamp: BigInt): BigInt {
-    let result = super.call("getRequestIdByTimestamp", [
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getRequestIdByTimestamp(_timestamp: BigInt): CallResult<BigInt> {
-    let result = super.tryCall("getRequestIdByTimestamp", [
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getSubmissionsByTimestamp(
-    _requestId: BigInt,
-    _timestamp: BigInt
-  ): Array<BigInt> {
-    let result = super.call("getSubmissionsByTimestamp", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-
-    return result[0].toBigIntArray();
-  }
-
-  try_getSubmissionsByTimestamp(
-    _requestId: BigInt,
-    _timestamp: BigInt
-  ): CallResult<Array<BigInt>> {
-    let result = super.tryCall("getSubmissionsByTimestamp", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigIntArray());
-  }
-
-  getAddressVars(_data: Bytes): Address {
-    let result = super.call("getAddressVars", [
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-
-    return result[0].toAddress();
-  }
-
-  try_getAddressVars(_data: Bytes): CallResult<Address> {
-    let result = super.tryCall("getAddressVars", [
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toAddress());
-  }
-
-  getSymbol(): string {
-    let result = super.call("getSymbol", []);
-
-    return result[0].toString();
-  }
-
-  try_getSymbol(): CallResult<string> {
-    let result = super.tryCall("getSymbol", []);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toString());
-  }
-
-  getName(): string {
-    let result = super.call("getName", []);
-
-    return result[0].toString();
-  }
-
-  try_getName(): CallResult<string> {
-    let result = super.tryCall("getName", []);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toString());
-  }
-
-  totalSupply(): BigInt {
-    let result = super.call("totalSupply", []);
-
-    return result[0].toBigInt();
-  }
-
-  try_totalSupply(): CallResult<BigInt> {
-    let result = super.tryCall("totalSupply", []);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getVariablesOnDeck(): Contract__getVariablesOnDeckResult {
-    let result = super.call("getVariablesOnDeck", []);
-
-    return new Contract__getVariablesOnDeckResult(
-      result[0].toBigInt(),
-      result[1].toBigInt(),
-      result[2].toString()
-    );
-  }
-
-  try_getVariablesOnDeck(): CallResult<Contract__getVariablesOnDeckResult> {
-    let result = super.tryCall("getVariablesOnDeck", []);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(
-      new Contract__getVariablesOnDeckResult(
-        value[0].toBigInt(),
-        value[1].toBigInt(),
-        value[2].toString()
-      )
-    );
-  }
-
-  getRequestIdByQueryHash(_request: Bytes): BigInt {
-    let result = super.call("getRequestIdByQueryHash", [
-      EthereumValue.fromFixedBytes(_request)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getRequestIdByQueryHash(_request: Bytes): CallResult<BigInt> {
-    let result = super.tryCall("getRequestIdByQueryHash", [
-      EthereumValue.fromFixedBytes(_request)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getLastNewValueById(_requestId: BigInt): Contract__getLastNewValueByIdResult {
-    let result = super.call("getLastNewValueById", [
-      EthereumValue.fromUnsignedBigInt(_requestId)
-    ]);
-
-    return new Contract__getLastNewValueByIdResult(
-      result[0].toBigInt(),
-      result[1].toBoolean()
-    );
-  }
-
-  try_getLastNewValueById(
-    _requestId: BigInt
-  ): CallResult<Contract__getLastNewValueByIdResult> {
-    let result = super.tryCall("getLastNewValueById", [
-      EthereumValue.fromUnsignedBigInt(_requestId)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(
-      new Contract__getLastNewValueByIdResult(
-        value[0].toBigInt(),
-        value[1].toBoolean()
-      )
-    );
-  }
-
-  isInDispute(_requestId: BigInt, _timestamp: BigInt): boolean {
-    let result = super.call("isInDispute", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_isInDispute(_requestId: BigInt, _timestamp: BigInt): CallResult<boolean> {
-    let result = super.tryCall("isInDispute", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBoolean());
-  }
-
-  getNewValueCountbyRequestId(_requestId: BigInt): BigInt {
-    let result = super.call("getNewValueCountbyRequestId", [
-      EthereumValue.fromUnsignedBigInt(_requestId)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getNewValueCountbyRequestId(_requestId: BigInt): CallResult<BigInt> {
-    let result = super.tryCall("getNewValueCountbyRequestId", [
-      EthereumValue.fromUnsignedBigInt(_requestId)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  balanceOfAt(_user: Address, _blockNumber: BigInt): BigInt {
-    let result = super.call("balanceOfAt", [
-      EthereumValue.fromAddress(_user),
-      EthereumValue.fromUnsignedBigInt(_blockNumber)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_balanceOfAt(_user: Address, _blockNumber: BigInt): CallResult<BigInt> {
-    let result = super.tryCall("balanceOfAt", [
-      EthereumValue.fromAddress(_user),
-      EthereumValue.fromUnsignedBigInt(_blockNumber)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getUintVar(_data: Bytes): BigInt {
-    let result = super.call("getUintVar", [
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getUintVar(_data: Bytes): CallResult<BigInt> {
-    let result = super.tryCall("getUintVar", [
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getRequestIdByRequestQIndex(_index: BigInt): BigInt {
-    let result = super.call("getRequestIdByRequestQIndex", [
-      EthereumValue.fromUnsignedBigInt(_index)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getRequestIdByRequestQIndex(_index: BigInt): CallResult<BigInt> {
-    let result = super.tryCall("getRequestIdByRequestQIndex", [
-      EthereumValue.fromUnsignedBigInt(_index)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  didMine(_challenge: Bytes, _miner: Address): boolean {
-    let result = super.call("didMine", [
-      EthereumValue.fromFixedBytes(_challenge),
-      EthereumValue.fromAddress(_miner)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_didMine(_challenge: Bytes, _miner: Address): CallResult<boolean> {
-    let result = super.tryCall("didMine", [
-      EthereumValue.fromFixedBytes(_challenge),
-      EthereumValue.fromAddress(_miner)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBoolean());
-  }
-
-  getMinersByRequestIdAndTimestamp(
-    _requestId: BigInt,
-    _timestamp: BigInt
-  ): Array<Address> {
-    let result = super.call("getMinersByRequestIdAndTimestamp", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-
-    return result[0].toAddressArray();
-  }
-
-  try_getMinersByRequestIdAndTimestamp(
-    _requestId: BigInt,
-    _timestamp: BigInt
-  ): CallResult<Array<Address>> {
-    let result = super.tryCall("getMinersByRequestIdAndTimestamp", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toAddressArray());
-  }
-
-  balanceOf(_user: Address): BigInt {
-    let result = super.call("balanceOf", [EthereumValue.fromAddress(_user)]);
-
-    return result[0].toBigInt();
-  }
-
-  try_balanceOf(_user: Address): CallResult<BigInt> {
-    let result = super.tryCall("balanceOf", [EthereumValue.fromAddress(_user)]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getStakerInfo(_staker: Address): Contract__getStakerInfoResult {
-    let result = super.call("getStakerInfo", [
-      EthereumValue.fromAddress(_staker)
-    ]);
-
-    return new Contract__getStakerInfoResult(
-      result[0].toBigInt(),
-      result[1].toBigInt()
-    );
-  }
-
-  try_getStakerInfo(
-    _staker: Address
-  ): CallResult<Contract__getStakerInfoResult> {
-    let result = super.tryCall("getStakerInfo", [
-      EthereumValue.fromAddress(_staker)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(
-      new Contract__getStakerInfoResult(
-        value[0].toBigInt(),
-        value[1].toBigInt()
-      )
-    );
-  }
-
-  getTimestampbyRequestIDandIndex(_requestID: BigInt, _index: BigInt): BigInt {
-    let result = super.call("getTimestampbyRequestIDandIndex", [
-      EthereumValue.fromUnsignedBigInt(_requestID),
-      EthereumValue.fromUnsignedBigInt(_index)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getTimestampbyRequestIDandIndex(
-    _requestID: BigInt,
-    _index: BigInt
-  ): CallResult<BigInt> {
-    let result = super.tryCall("getTimestampbyRequestIDandIndex", [
-      EthereumValue.fromUnsignedBigInt(_requestID),
-      EthereumValue.fromUnsignedBigInt(_index)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getDisputeUintVars(_disputeId: BigInt, _data: Bytes): BigInt {
-    let result = super.call("getDisputeUintVars", [
-      EthereumValue.fromUnsignedBigInt(_disputeId),
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getDisputeUintVars(_disputeId: BigInt, _data: Bytes): CallResult<BigInt> {
-    let result = super.tryCall("getDisputeUintVars", [
-      EthereumValue.fromUnsignedBigInt(_disputeId),
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  retrieveData(_requestId: BigInt, _timestamp: BigInt): BigInt {
-    let result = super.call("retrieveData", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_retrieveData(_requestId: BigInt, _timestamp: BigInt): CallResult<BigInt> {
-    let result = super.tryCall("retrieveData", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  allowedToTrade(_user: Address, _amount: BigInt): boolean {
-    let result = super.call("allowedToTrade", [
-      EthereumValue.fromAddress(_user),
+  approve(_spender: Address, _amount: BigInt): boolean {
+    let result = super.call("approve", [
+      EthereumValue.fromAddress(_spender),
       EthereumValue.fromUnsignedBigInt(_amount)
     ]);
 
     return result[0].toBoolean();
   }
 
-  try_allowedToTrade(_user: Address, _amount: BigInt): CallResult<boolean> {
-    let result = super.tryCall("allowedToTrade", [
-      EthereumValue.fromAddress(_user),
+  try_approve(_spender: Address, _amount: BigInt): CallResult<boolean> {
+    let result = super.tryCall("approve", [
+      EthereumValue.fromAddress(_spender),
       EthereumValue.fromUnsignedBigInt(_amount)
     ]);
     if (result.reverted) {
@@ -690,109 +86,136 @@ export class Contract extends SmartContract {
     return CallResult.fromValue(value[0].toBoolean());
   }
 
-  getCurrentVariables(): Contract__getCurrentVariablesResult {
-    let result = super.call("getCurrentVariables", []);
+  transfer(_to: Address, _amount: BigInt): boolean {
+    let result = super.call("transfer", [
+      EthereumValue.fromAddress(_to),
+      EthereumValue.fromUnsignedBigInt(_amount)
+    ]);
 
-    return new Contract__getCurrentVariablesResult(
+    return result[0].toBoolean();
+  }
+
+  try_transfer(_to: Address, _amount: BigInt): CallResult<boolean> {
+    let result = super.tryCall("transfer", [
+      EthereumValue.fromAddress(_to),
+      EthereumValue.fromUnsignedBigInt(_amount)
+    ]);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBoolean());
+  }
+
+  transferFrom(_from: Address, _to: Address, _amount: BigInt): boolean {
+    let result = super.call("transferFrom", [
+      EthereumValue.fromAddress(_from),
+      EthereumValue.fromAddress(_to),
+      EthereumValue.fromUnsignedBigInt(_amount)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_transferFrom(
+    _from: Address,
+    _to: Address,
+    _amount: BigInt
+  ): CallResult<boolean> {
+    let result = super.tryCall("transferFrom", [
+      EthereumValue.fromAddress(_from),
+      EthereumValue.fromAddress(_to),
+      EthereumValue.fromUnsignedBigInt(_amount)
+    ]);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBoolean());
+  }
+
+  name(): string {
+    let result = super.call("name", []);
+
+    return result[0].toString();
+  }
+
+  try_name(): CallResult<string> {
+    let result = super.tryCall("name", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toString());
+  }
+
+  symbol(): string {
+    let result = super.call("symbol", []);
+
+    return result[0].toString();
+  }
+
+  try_symbol(): CallResult<string> {
+    let result = super.tryCall("symbol", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toString());
+  }
+
+  decimals(): i32 {
+    let result = super.call("decimals", []);
+
+    return result[0].toI32();
+  }
+
+  try_decimals(): CallResult<i32> {
+    let result = super.tryCall("decimals", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toI32());
+  }
+
+  getNewCurrentVariables(): Contract__getNewCurrentVariablesResult {
+    let result = super.call("getNewCurrentVariables", []);
+
+    return new Contract__getNewCurrentVariablesResult(
       result[0].toBytes(),
-      result[1].toBigInt(),
+      result[1].toBigIntArray(),
       result[2].toBigInt(),
-      result[3].toString(),
-      result[4].toBigInt(),
-      result[5].toBigInt()
+      result[3].toBigInt()
     );
   }
 
-  try_getCurrentVariables(): CallResult<Contract__getCurrentVariablesResult> {
-    let result = super.tryCall("getCurrentVariables", []);
+  try_getNewCurrentVariables(): CallResult<
+    Contract__getNewCurrentVariablesResult
+  > {
+    let result = super.tryCall("getNewCurrentVariables", []);
     if (result.reverted) {
       return new CallResult();
     }
     let value = result.value;
     return CallResult.fromValue(
-      new Contract__getCurrentVariablesResult(
+      new Contract__getNewCurrentVariablesResult(
         value[0].toBytes(),
-        value[1].toBigInt(),
+        value[1].toBigIntArray(),
         value[2].toBigInt(),
-        value[3].toString(),
-        value[4].toBigInt(),
-        value[5].toBigInt()
+        value[3].toBigInt()
       )
     );
   }
 
-  didVote(_disputeId: BigInt, _address: Address): boolean {
-    let result = super.call("didVote", [
-      EthereumValue.fromUnsignedBigInt(_disputeId),
-      EthereumValue.fromAddress(_address)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_didVote(_disputeId: BigInt, _address: Address): CallResult<boolean> {
-    let result = super.tryCall("didVote", [
-      EthereumValue.fromUnsignedBigInt(_disputeId),
-      EthereumValue.fromAddress(_address)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBoolean());
-  }
-
-  getAllDisputeVars(_disputeId: BigInt): Contract__getAllDisputeVarsResult {
-    let result = super.call("getAllDisputeVars", [
-      EthereumValue.fromUnsignedBigInt(_disputeId)
-    ]);
-
-    return new Contract__getAllDisputeVarsResult(
-      result[0].toBytes(),
-      result[1].toBoolean(),
-      result[2].toBoolean(),
-      result[3].toBoolean(),
-      result[4].toAddress(),
-      result[5].toAddress(),
-      result[6].toAddress(),
-      result[7].toBigIntArray(),
-      result[8].toBigInt()
-    );
-  }
-
-  try_getAllDisputeVars(
-    _disputeId: BigInt
-  ): CallResult<Contract__getAllDisputeVarsResult> {
-    let result = super.tryCall("getAllDisputeVars", [
-      EthereumValue.fromUnsignedBigInt(_disputeId)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(
-      new Contract__getAllDisputeVarsResult(
-        value[0].toBytes(),
-        value[1].toBoolean(),
-        value[2].toBoolean(),
-        value[3].toBoolean(),
-        value[4].toAddress(),
-        value[5].toAddress(),
-        value[6].toAddress(),
-        value[7].toBigIntArray(),
-        value[8].toBigInt()
-      )
-    );
-  }
-
-  getRequestQ(): Array<BigInt> {
-    let result = super.call("getRequestQ", []);
+  getTopRequestIDs(): Array<BigInt> {
+    let result = super.call("getTopRequestIDs", []);
 
     return result[0].toBigIntArray();
   }
 
-  try_getRequestQ(): CallResult<Array<BigInt>> {
-    let result = super.tryCall("getRequestQ", []);
+  try_getTopRequestIDs(): CallResult<Array<BigInt>> {
+    let result = super.tryCall("getTopRequestIDs", []);
     if (result.reverted) {
       return new CallResult();
     }
@@ -800,264 +223,582 @@ export class Contract extends SmartContract {
     return CallResult.fromValue(value[0].toBigIntArray());
   }
 
-  getMinedBlockNum(_requestId: BigInt, _timestamp: BigInt): BigInt {
-    let result = super.call("getMinedBlockNum", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
+  getNewVariablesOnDeck(): Contract__getNewVariablesOnDeckResult {
+    let result = super.call("getNewVariablesOnDeck", []);
 
-    return result[0].toBigInt();
-  }
-
-  try_getMinedBlockNum(
-    _requestId: BigInt,
-    _timestamp: BigInt
-  ): CallResult<BigInt> {
-    let result = super.tryCall("getMinedBlockNum", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromUnsignedBigInt(_timestamp)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getDisputeIdByDisputeHash(_hash: Bytes): BigInt {
-    let result = super.call("getDisputeIdByDisputeHash", [
-      EthereumValue.fromFixedBytes(_hash)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getDisputeIdByDisputeHash(_hash: Bytes): CallResult<BigInt> {
-    let result = super.tryCall("getDisputeIdByDisputeHash", [
-      EthereumValue.fromFixedBytes(_hash)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  allowance(_user: Address, _spender: Address): BigInt {
-    let result = super.call("allowance", [
-      EthereumValue.fromAddress(_user),
-      EthereumValue.fromAddress(_spender)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_allowance(_user: Address, _spender: Address): CallResult<BigInt> {
-    let result = super.tryCall("allowance", [
-      EthereumValue.fromAddress(_user),
-      EthereumValue.fromAddress(_spender)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getRequestUintVars(_requestId: BigInt, _data: Bytes): BigInt {
-    let result = super.call("getRequestUintVars", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getRequestUintVars(_requestId: BigInt, _data: Bytes): CallResult<BigInt> {
-    let result = super.tryCall("getRequestUintVars", [
-      EthereumValue.fromUnsignedBigInt(_requestId),
-      EthereumValue.fromFixedBytes(_data)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigInt());
-  }
-
-  getRequestVars(_requestId: BigInt): Contract__getRequestVarsResult {
-    let result = super.call("getRequestVars", [
-      EthereumValue.fromUnsignedBigInt(_requestId)
-    ]);
-
-    return new Contract__getRequestVarsResult(
-      result[0].toString(),
-      result[1].toString(),
-      result[2].toBytes(),
-      result[3].toBigInt(),
-      result[4].toBigInt(),
-      result[5].toBigInt()
+    return new Contract__getNewVariablesOnDeckResult(
+      result[0].toBigIntArray(),
+      result[1].toBigIntArray()
     );
   }
 
-  try_getRequestVars(
-    _requestId: BigInt
-  ): CallResult<Contract__getRequestVarsResult> {
-    let result = super.tryCall("getRequestVars", [
-      EthereumValue.fromUnsignedBigInt(_requestId)
-    ]);
+  try_getNewVariablesOnDeck(): CallResult<
+    Contract__getNewVariablesOnDeckResult
+  > {
+    let result = super.tryCall("getNewVariablesOnDeck", []);
     if (result.reverted) {
       return new CallResult();
     }
     let value = result.value;
     return CallResult.fromValue(
-      new Contract__getRequestVarsResult(
-        value[0].toString(),
-        value[1].toString(),
-        value[2].toBytes(),
-        value[3].toBigInt(),
-        value[4].toBigInt(),
-        value[5].toBigInt()
-      )
-    );
-  }
-
-  getLastNewValue(): Contract__getLastNewValueResult {
-    let result = super.call("getLastNewValue", []);
-
-    return new Contract__getLastNewValueResult(
-      result[0].toBigInt(),
-      result[1].toBoolean()
-    );
-  }
-
-  try_getLastNewValue(): CallResult<Contract__getLastNewValueResult> {
-    let result = super.tryCall("getLastNewValue", []);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(
-      new Contract__getLastNewValueResult(
-        value[0].toBigInt(),
-        value[1].toBoolean()
+      new Contract__getNewVariablesOnDeckResult(
+        value[0].toBigIntArray(),
+        value[1].toBigIntArray()
       )
     );
   }
 }
 
-export class ChangeDeityCall extends EthereumCall {
-  get inputs(): ChangeDeityCall__Inputs {
-    return new ChangeDeityCall__Inputs(this);
+export class BeginDisputeCall extends EthereumCall {
+  get inputs(): BeginDisputeCall__Inputs {
+    return new BeginDisputeCall__Inputs(this);
   }
 
-  get outputs(): ChangeDeityCall__Outputs {
-    return new ChangeDeityCall__Outputs(this);
+  get outputs(): BeginDisputeCall__Outputs {
+    return new BeginDisputeCall__Outputs(this);
   }
 }
 
-export class ChangeDeityCall__Inputs {
-  _call: ChangeDeityCall;
+export class BeginDisputeCall__Inputs {
+  _call: BeginDisputeCall;
 
-  constructor(call: ChangeDeityCall) {
+  constructor(call: BeginDisputeCall) {
     this._call = call;
   }
 
-  get _newDeity(): Address {
+  get _requestId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get _timestamp(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get _minerIndex(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+}
+
+export class BeginDisputeCall__Outputs {
+  _call: BeginDisputeCall;
+
+  constructor(call: BeginDisputeCall) {
+    this._call = call;
+  }
+}
+
+export class VoteCall extends EthereumCall {
+  get inputs(): VoteCall__Inputs {
+    return new VoteCall__Inputs(this);
+  }
+
+  get outputs(): VoteCall__Outputs {
+    return new VoteCall__Outputs(this);
+  }
+}
+
+export class VoteCall__Inputs {
+  _call: VoteCall;
+
+  constructor(call: VoteCall) {
+    this._call = call;
+  }
+
+  get _disputeId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get _supportsDispute(): boolean {
+    return this._call.inputValues[1].value.toBoolean();
+  }
+}
+
+export class VoteCall__Outputs {
+  _call: VoteCall;
+
+  constructor(call: VoteCall) {
+    this._call = call;
+  }
+}
+
+export class TallyVotesCall extends EthereumCall {
+  get inputs(): TallyVotesCall__Inputs {
+    return new TallyVotesCall__Inputs(this);
+  }
+
+  get outputs(): TallyVotesCall__Outputs {
+    return new TallyVotesCall__Outputs(this);
+  }
+}
+
+export class TallyVotesCall__Inputs {
+  _call: TallyVotesCall;
+
+  constructor(call: TallyVotesCall) {
+    this._call = call;
+  }
+
+  get _disputeId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class TallyVotesCall__Outputs {
+  _call: TallyVotesCall;
+
+  constructor(call: TallyVotesCall) {
+    this._call = call;
+  }
+}
+
+export class ProposeForkCall extends EthereumCall {
+  get inputs(): ProposeForkCall__Inputs {
+    return new ProposeForkCall__Inputs(this);
+  }
+
+  get outputs(): ProposeForkCall__Outputs {
+    return new ProposeForkCall__Outputs(this);
+  }
+}
+
+export class ProposeForkCall__Inputs {
+  _call: ProposeForkCall;
+
+  constructor(call: ProposeForkCall) {
+    this._call = call;
+  }
+
+  get _propNewTellorAddress(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 }
 
-export class ChangeDeityCall__Outputs {
-  _call: ChangeDeityCall;
+export class ProposeForkCall__Outputs {
+  _call: ProposeForkCall;
 
-  constructor(call: ChangeDeityCall) {
+  constructor(call: ProposeForkCall) {
     this._call = call;
   }
 }
 
-export class ChangeTellorContractCall extends EthereumCall {
-  get inputs(): ChangeTellorContractCall__Inputs {
-    return new ChangeTellorContractCall__Inputs(this);
+export class AddTipCall extends EthereumCall {
+  get inputs(): AddTipCall__Inputs {
+    return new AddTipCall__Inputs(this);
   }
 
-  get outputs(): ChangeTellorContractCall__Outputs {
-    return new ChangeTellorContractCall__Outputs(this);
+  get outputs(): AddTipCall__Outputs {
+    return new AddTipCall__Outputs(this);
   }
 }
 
-export class ChangeTellorContractCall__Inputs {
-  _call: ChangeTellorContractCall;
+export class AddTipCall__Inputs {
+  _call: AddTipCall;
 
-  constructor(call: ChangeTellorContractCall) {
+  constructor(call: AddTipCall) {
     this._call = call;
   }
 
-  get _tellorContract(): Address {
+  get _requestId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get _tip(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class AddTipCall__Outputs {
+  _call: AddTipCall;
+
+  constructor(call: AddTipCall) {
+    this._call = call;
+  }
+}
+
+export class SubmitMiningSolutionCall extends EthereumCall {
+  get inputs(): SubmitMiningSolutionCall__Inputs {
+    return new SubmitMiningSolutionCall__Inputs(this);
+  }
+
+  get outputs(): SubmitMiningSolutionCall__Outputs {
+    return new SubmitMiningSolutionCall__Outputs(this);
+  }
+}
+
+export class SubmitMiningSolutionCall__Inputs {
+  _call: SubmitMiningSolutionCall;
+
+  constructor(call: SubmitMiningSolutionCall) {
+    this._call = call;
+  }
+
+  get _nonce(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get _requestId(): Array<BigInt> {
+    return this._call.inputValues[1].value.toBigIntArray();
+  }
+
+  get _value(): Array<BigInt> {
+    return this._call.inputValues[2].value.toBigIntArray();
+  }
+}
+
+export class SubmitMiningSolutionCall__Outputs {
+  _call: SubmitMiningSolutionCall;
+
+  constructor(call: SubmitMiningSolutionCall) {
+    this._call = call;
+  }
+}
+
+export class SubmitMiningSolution1Call extends EthereumCall {
+  get inputs(): SubmitMiningSolution1Call__Inputs {
+    return new SubmitMiningSolution1Call__Inputs(this);
+  }
+
+  get outputs(): SubmitMiningSolution1Call__Outputs {
+    return new SubmitMiningSolution1Call__Outputs(this);
+  }
+}
+
+export class SubmitMiningSolution1Call__Inputs {
+  _call: SubmitMiningSolution1Call;
+
+  constructor(call: SubmitMiningSolution1Call) {
+    this._call = call;
+  }
+
+  get _nonce(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get _requestId(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get _value(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+}
+
+export class SubmitMiningSolution1Call__Outputs {
+  _call: SubmitMiningSolution1Call;
+
+  constructor(call: SubmitMiningSolution1Call) {
+    this._call = call;
+  }
+}
+
+export class ProposeOwnershipCall extends EthereumCall {
+  get inputs(): ProposeOwnershipCall__Inputs {
+    return new ProposeOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): ProposeOwnershipCall__Outputs {
+    return new ProposeOwnershipCall__Outputs(this);
+  }
+}
+
+export class ProposeOwnershipCall__Inputs {
+  _call: ProposeOwnershipCall;
+
+  constructor(call: ProposeOwnershipCall) {
+    this._call = call;
+  }
+
+  get _pendingOwner(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 }
 
-export class ChangeTellorContractCall__Outputs {
-  _call: ChangeTellorContractCall;
+export class ProposeOwnershipCall__Outputs {
+  _call: ProposeOwnershipCall;
 
-  constructor(call: ChangeTellorContractCall) {
+  constructor(call: ProposeOwnershipCall) {
     this._call = call;
   }
 }
 
-export class ConstructorCall extends EthereumCall {
-  get inputs(): ConstructorCall__Inputs {
-    return new ConstructorCall__Inputs(this);
+export class ClaimOwnershipCall extends EthereumCall {
+  get inputs(): ClaimOwnershipCall__Inputs {
+    return new ClaimOwnershipCall__Inputs(this);
   }
 
-  get outputs(): ConstructorCall__Outputs {
-    return new ConstructorCall__Outputs(this);
+  get outputs(): ClaimOwnershipCall__Outputs {
+    return new ClaimOwnershipCall__Outputs(this);
   }
 }
 
-export class ConstructorCall__Inputs {
-  _call: ConstructorCall;
+export class ClaimOwnershipCall__Inputs {
+  _call: ClaimOwnershipCall;
 
-  constructor(call: ConstructorCall) {
+  constructor(call: ClaimOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class ClaimOwnershipCall__Outputs {
+  _call: ClaimOwnershipCall;
+
+  constructor(call: ClaimOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class DepositStakeCall extends EthereumCall {
+  get inputs(): DepositStakeCall__Inputs {
+    return new DepositStakeCall__Inputs(this);
+  }
+
+  get outputs(): DepositStakeCall__Outputs {
+    return new DepositStakeCall__Outputs(this);
+  }
+}
+
+export class DepositStakeCall__Inputs {
+  _call: DepositStakeCall;
+
+  constructor(call: DepositStakeCall) {
+    this._call = call;
+  }
+}
+
+export class DepositStakeCall__Outputs {
+  _call: DepositStakeCall;
+
+  constructor(call: DepositStakeCall) {
+    this._call = call;
+  }
+}
+
+export class RequestStakingWithdrawCall extends EthereumCall {
+  get inputs(): RequestStakingWithdrawCall__Inputs {
+    return new RequestStakingWithdrawCall__Inputs(this);
+  }
+
+  get outputs(): RequestStakingWithdrawCall__Outputs {
+    return new RequestStakingWithdrawCall__Outputs(this);
+  }
+}
+
+export class RequestStakingWithdrawCall__Inputs {
+  _call: RequestStakingWithdrawCall;
+
+  constructor(call: RequestStakingWithdrawCall) {
+    this._call = call;
+  }
+}
+
+export class RequestStakingWithdrawCall__Outputs {
+  _call: RequestStakingWithdrawCall;
+
+  constructor(call: RequestStakingWithdrawCall) {
+    this._call = call;
+  }
+}
+
+export class WithdrawStakeCall extends EthereumCall {
+  get inputs(): WithdrawStakeCall__Inputs {
+    return new WithdrawStakeCall__Inputs(this);
+  }
+
+  get outputs(): WithdrawStakeCall__Outputs {
+    return new WithdrawStakeCall__Outputs(this);
+  }
+}
+
+export class WithdrawStakeCall__Inputs {
+  _call: WithdrawStakeCall;
+
+  constructor(call: WithdrawStakeCall) {
+    this._call = call;
+  }
+}
+
+export class WithdrawStakeCall__Outputs {
+  _call: WithdrawStakeCall;
+
+  constructor(call: WithdrawStakeCall) {
+    this._call = call;
+  }
+}
+
+export class ApproveCall extends EthereumCall {
+  get inputs(): ApproveCall__Inputs {
+    return new ApproveCall__Inputs(this);
+  }
+
+  get outputs(): ApproveCall__Outputs {
+    return new ApproveCall__Outputs(this);
+  }
+}
+
+export class ApproveCall__Inputs {
+  _call: ApproveCall;
+
+  constructor(call: ApproveCall) {
     this._call = call;
   }
 
-  get _tellorContract(): Address {
+  get _spender(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
+
+  get _amount(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
 }
 
-export class ConstructorCall__Outputs {
-  _call: ConstructorCall;
+export class ApproveCall__Outputs {
+  _call: ApproveCall;
 
-  constructor(call: ConstructorCall) {
+  constructor(call: ApproveCall) {
+    this._call = call;
+  }
+
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
+  }
+}
+
+export class TransferCall extends EthereumCall {
+  get inputs(): TransferCall__Inputs {
+    return new TransferCall__Inputs(this);
+  }
+
+  get outputs(): TransferCall__Outputs {
+    return new TransferCall__Outputs(this);
+  }
+}
+
+export class TransferCall__Inputs {
+  _call: TransferCall;
+
+  constructor(call: TransferCall) {
+    this._call = call;
+  }
+
+  get _to(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _amount(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class TransferCall__Outputs {
+  _call: TransferCall;
+
+  constructor(call: TransferCall) {
+    this._call = call;
+  }
+
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
+  }
+}
+
+export class TransferFromCall extends EthereumCall {
+  get inputs(): TransferFromCall__Inputs {
+    return new TransferFromCall__Inputs(this);
+  }
+
+  get outputs(): TransferFromCall__Outputs {
+    return new TransferFromCall__Outputs(this);
+  }
+}
+
+export class TransferFromCall__Inputs {
+  _call: TransferFromCall;
+
+  constructor(call: TransferFromCall) {
+    this._call = call;
+  }
+
+  get _from(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _to(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get _amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+}
+
+export class TransferFromCall__Outputs {
+  _call: TransferFromCall;
+
+  constructor(call: TransferFromCall) {
+    this._call = call;
+  }
+
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
+  }
+}
+
+export class UpdateTellorCall extends EthereumCall {
+  get inputs(): UpdateTellorCall__Inputs {
+    return new UpdateTellorCall__Inputs(this);
+  }
+
+  get outputs(): UpdateTellorCall__Outputs {
+    return new UpdateTellorCall__Outputs(this);
+  }
+}
+
+export class UpdateTellorCall__Inputs {
+  _call: UpdateTellorCall;
+
+  constructor(call: UpdateTellorCall) {
+    this._call = call;
+  }
+
+  get _disputeId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class UpdateTellorCall__Outputs {
+  _call: UpdateTellorCall;
+
+  constructor(call: UpdateTellorCall) {
     this._call = call;
   }
 }
 
-export class DefaultCall extends EthereumCall {
-  get inputs(): DefaultCall__Inputs {
-    return new DefaultCall__Inputs(this);
+export class UnlockDisputeFeeCall extends EthereumCall {
+  get inputs(): UnlockDisputeFeeCall__Inputs {
+    return new UnlockDisputeFeeCall__Inputs(this);
   }
 
-  get outputs(): DefaultCall__Outputs {
-    return new DefaultCall__Outputs(this);
+  get outputs(): UnlockDisputeFeeCall__Outputs {
+    return new UnlockDisputeFeeCall__Outputs(this);
   }
 }
 
-export class DefaultCall__Inputs {
-  _call: DefaultCall;
+export class UnlockDisputeFeeCall__Inputs {
+  _call: UnlockDisputeFeeCall;
 
-  constructor(call: DefaultCall) {
+  constructor(call: UnlockDisputeFeeCall) {
     this._call = call;
   }
+
+  get _disputeId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
 }
 
-export class DefaultCall__Outputs {
-  _call: DefaultCall;
+export class UnlockDisputeFeeCall__Outputs {
+  _call: UnlockDisputeFeeCall;
 
-  constructor(call: DefaultCall) {
+  constructor(call: UnlockDisputeFeeCall) {
     this._call = call;
   }
 }

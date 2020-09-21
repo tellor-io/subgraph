@@ -12,134 +12,6 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Request extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id !== null, "Cannot save Request entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Request entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Request", id.toString(), this);
-  }
-
-  static load(id: string): Request | null {
-    return store.get("Request", id) as Request | null;
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get timestamp(): BigInt {
-    let value = this.get("timestamp");
-    return value.toBigInt();
-  }
-
-  set timestamp(value: BigInt) {
-    this.set("timestamp", Value.fromBigInt(value));
-  }
-
-  get requestId(): BigInt {
-    let value = this.get("requestId");
-    return value.toBigInt();
-  }
-
-  set requestId(value: BigInt) {
-    this.set("requestId", Value.fromBigInt(value));
-  }
-
-  get sender(): Bytes {
-    let value = this.get("sender");
-    return value.toBytes();
-  }
-
-  set sender(value: Bytes) {
-    this.set("sender", Value.fromBytes(value));
-  }
-
-  get query(): string {
-    let value = this.get("query");
-    return value.toString();
-  }
-
-  set query(value: string) {
-    this.set("query", Value.fromString(value));
-  }
-
-  get querySymbol(): string {
-    let value = this.get("querySymbol");
-    return value.toString();
-  }
-
-  set querySymbol(value: string) {
-    this.set("querySymbol", Value.fromString(value));
-  }
-
-  get granularity(): BigInt {
-    let value = this.get("granularity");
-    return value.toBigInt();
-  }
-
-  set granularity(value: BigInt) {
-    this.set("granularity", Value.fromBigInt(value));
-  }
-
-  get totalTips(): BigInt {
-    let value = this.get("totalTips");
-    return value.toBigInt();
-  }
-
-  set totalTips(value: BigInt) {
-    this.set("totalTips", Value.fromBigInt(value));
-  }
-
-  get miningEvents(): Array<string> | null {
-    let value = this.get("miningEvents");
-    if (value === null) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set miningEvents(value: Array<string> | null) {
-    if (value === null) {
-      this.unset("miningEvents");
-    } else {
-      this.set("miningEvents", Value.fromStringArray(value as Array<string>));
-    }
-  }
-
-  get disputes(): Array<string> | null {
-    let value = this.get("disputes");
-    if (value === null) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set disputes(value: Array<string> | null) {
-    if (value === null) {
-      this.unset("disputes");
-    } else {
-      this.set("disputes", Value.fromStringArray(value as Array<string>));
-    }
-  }
-}
-
 export class MiningEvent extends Entity {
   constructor(id: string) {
     super();
@@ -179,22 +51,21 @@ export class MiningEvent extends Entity {
     this.set("timestamp", Value.fromBigInt(value));
   }
 
-  get requestId(): BigInt {
-    let value = this.get("requestId");
-    return value.toBigInt();
+  get requestIds(): Array<BigInt> | null {
+    let value = this.get("requestIds");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigIntArray();
+    }
   }
 
-  set requestId(value: BigInt) {
-    this.set("requestId", Value.fromBigInt(value));
-  }
-
-  get request(): string {
-    let value = this.get("request");
-    return value.toString();
-  }
-
-  set request(value: string) {
-    this.set("request", Value.fromString(value));
+  set requestIds(value: Array<BigInt> | null) {
+    if (value === null) {
+      this.unset("requestIds");
+    } else {
+      this.set("requestIds", Value.fromBigIntArray(value as Array<BigInt>));
+    }
   }
 
   get time(): BigInt {
@@ -206,13 +77,21 @@ export class MiningEvent extends Entity {
     this.set("time", Value.fromBigInt(value));
   }
 
-  get minedValue(): BigInt {
-    let value = this.get("minedValue");
-    return value.toBigInt();
+  get minedValues(): Array<BigInt> | null {
+    let value = this.get("minedValues");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigIntArray();
+    }
   }
 
-  set minedValue(value: BigInt) {
-    this.set("minedValue", Value.fromBigInt(value));
+  set minedValues(value: Array<BigInt> | null) {
+    if (value === null) {
+      this.unset("minedValues");
+    } else {
+      this.set("minedValues", Value.fromBigIntArray(value as Array<BigInt>));
+    }
   }
 
   get totalTips(): BigInt {
@@ -299,13 +178,21 @@ export class MinerValue extends Entity {
     this.set("timestamp", Value.fromBigInt(value));
   }
 
-  get requestId(): BigInt {
-    let value = this.get("requestId");
-    return value.toBigInt();
+  get requestIds(): Array<BigInt> | null {
+    let value = this.get("requestIds");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigIntArray();
+    }
   }
 
-  set requestId(value: BigInt) {
-    this.set("requestId", Value.fromBigInt(value));
+  set requestIds(value: Array<BigInt> | null) {
+    if (value === null) {
+      this.unset("requestIds");
+    } else {
+      this.set("requestIds", Value.fromBigIntArray(value as Array<BigInt>));
+    }
   }
 
   get currentChallenge(): Bytes {
@@ -361,13 +248,21 @@ export class MinerValue extends Entity {
     this.set("blockNumber", Value.fromBigInt(value));
   }
 
-  get value(): BigInt {
-    let value = this.get("value");
-    return value.toBigInt();
+  get values(): Array<BigInt> | null {
+    let value = this.get("values");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigIntArray();
+    }
   }
 
-  set value(value: BigInt) {
-    this.set("value", Value.fromBigInt(value));
+  set values(value: Array<BigInt> | null) {
+    if (value === null) {
+      this.unset("values");
+    } else {
+      this.set("values", Value.fromBigIntArray(value as Array<BigInt>));
+    }
   }
 }
 
@@ -426,15 +321,6 @@ export class Dispute extends Entity {
 
   set requestId(value: BigInt) {
     this.set("requestId", Value.fromBigInt(value));
-  }
-
-  get request(): string {
-    let value = this.get("request");
-    return value.toString();
-  }
-
-  set request(value: string) {
-    this.set("request", Value.fromString(value));
   }
 
   get result(): BigInt | null {
@@ -634,6 +520,15 @@ export class Vote extends Entity {
 
   set voter(value: Bytes) {
     this.set("voter", Value.fromBytes(value));
+  }
+
+  get voteWeight(): BigInt {
+    let value = this.get("voteWeight");
+    return value.toBigInt();
+  }
+
+  set voteWeight(value: BigInt) {
+    this.set("voteWeight", Value.fromBigInt(value));
   }
 
   get timestamp(): BigInt {
