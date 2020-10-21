@@ -61,3 +61,10 @@ type Vote @entity {
   voter: Bytes!
   timestamp: BigInt!
 }
+
+type Supply @entity {
+  id: ID!
+  timestamp: String! #will be converted to datetime elsewhere
+  totalSupply: BigInt!
+  blockNumber: BigInt!
+}
