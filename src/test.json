@@ -1,0 +1,43 @@
+{
+  "data": {
+    "miningEvents": [
+      {
+        "currentChallenge": "0x302f387f46a60ab9775bcb10eaac19210800716730d44cd1643374ede362304f",
+        "minedValues": ["2516", "2517", "2517", "2518", "2518"],
+        "minerValues": [
+          {
+            "currentChallenge": "0x302f387f46a60ab9775bcb10eaac19210800716730d44cd1643374ede362304f",
+            "miner": "0xcdd8fa31af8475574b8909f135d510579a8087d3",
+            "requestIds": ["13", "1", "5", "2", "6"],
+            "values": ["245530", "365060000", "33230", "10990100000", "2517"]
+          },
+          {
+            "currentChallenge": "0x302f387f46a60ab9775bcb10eaac19210800716730d44cd1643374ede362304f",
+            "miner": "0xe0d7bae200f0994b11423e8be8f386060bbdd808",
+            "requestIds": ["13", "1", "5", "2", "6"],
+            "values": ["245530", "365330000", "33260", "10990100000", "2516"]
+          },
+          {
+            "currentChallenge": "0x302f387f46a60ab9775bcb10eaac19210800716730d44cd1643374ede362304f",
+            "miner": "0xe7e5c22a8f366b4418a06dab6438fba3a7259cea",
+            "requestIds": ["13", "1", "5", "2", "6"],
+            "values": ["245530", "364780000", "33230", "10986100000", "2518"]
+          },
+          {
+            "currentChallenge": "0x302f387f46a60ab9775bcb10eaac19210800716730d44cd1643374ede362304f",
+            "miner": "0xf646e74740ebd0dbb123b743f8027d9c6f7b766d",
+            "requestIds": ["13", "1", "5", "2", "6"],
+            "values": ["245530", "364700000", "33230", "10990436500", "2518"]
+          },
+          {
+            "currentChallenge": "0x302f387f46a60ab9775bcb10eaac19210800716730d44cd1643374ede362304f",
+            "miner": "0xf67de3c24cc28aa9a04ea0caa0027061e4317b43",
+            "requestIds": ["13", "1", "5", "2", "6"],
+            "values": ["245530", "365040000", "33250", "10991214600", "2517"]
+          }
+        ],
+        "requestIds": ["13", "1", "5", "2", "6"]
+      }
+    ]
+  }
+}
