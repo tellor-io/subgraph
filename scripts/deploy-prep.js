@@ -8,7 +8,7 @@ const config = {
   },
   mainnet: {
     address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5",
-    startBlock: 8265520,
+    startBlock: 10919653,
   },
 };
 

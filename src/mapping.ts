@@ -73,6 +73,19 @@ export function handleNewDispute(event: NewDispute): void {
 export function handleVoted(event: Voted): void {
   let dispute = Dispute.load(event.params._disputeID.toString());
 
+  if (dispute === null) {
+    dispute = new Dispute(event.params._disputeID.toString());
+
+    let contract = GettersContract.bind(event.address);
+    let disputeVars = contract.getAllDisputeVars(event.params._disputeID);
+
+    dispute.disputeId = event.params._disputeID;
+    dispute.miner = disputeVars.value4;
+    dispute.requestId = disputeVars.value7[0];
+    dispute.timestamp = disputeVars.value7[1];
+    dispute.relatedMiningEventData = disputeVars.value7;
+  }
+
   let voteId = event.params._disputeID
     .toString()
     .concat("-vote-")
