@@ -107,7 +107,7 @@ export class Request extends Entity {
 
   get miningEvents(): Array<string> | null {
     let value = this.get("miningEvents");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -124,7 +124,7 @@ export class Request extends Entity {
 
   get disputes(): Array<string> | null {
     let value = this.get("disputes");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -244,7 +244,7 @@ export class MiningEvent extends Entity {
 
   get minerValues(): Array<string> | null {
     let value = this.get("minerValues");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -319,7 +319,7 @@ export class MinerValue extends Entity {
 
   get miningEvent(): string | null {
     let value = this.get("miningEvent");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -439,7 +439,7 @@ export class Dispute extends Entity {
 
   get result(): BigInt | null {
     let value = this.get("result");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -456,7 +456,7 @@ export class Dispute extends Entity {
 
   get reportedMiner(): Bytes | null {
     let value = this.get("reportedMiner");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBytes();
@@ -473,7 +473,7 @@ export class Dispute extends Entity {
 
   get reportingParty(): Bytes | null {
     let value = this.get("reportingParty");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBytes();
@@ -508,7 +508,7 @@ export class Dispute extends Entity {
 
   get tally(): BigInt | null {
     let value = this.get("tally");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -534,7 +534,7 @@ export class Dispute extends Entity {
 
   get relatedMiningEventData(): Array<BigInt> | null {
     let value = this.get("relatedMiningEventData");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigIntArray();
@@ -554,7 +554,7 @@ export class Dispute extends Entity {
 
   get votes(): Array<string> | null {
     let value = this.get("votes");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -643,5 +643,63 @@ export class Vote extends Entity {
 
   set timestamp(value: BigInt) {
     this.set("timestamp", Value.fromBigInt(value));
+  }
+}
+
+export class Supply extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Supply entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Supply entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Supply", id.toString(), this);
+  }
+
+  static load(id: string): Supply | null {
+    return store.get("Supply", id) as Supply | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get timestamp(): string {
+    let value = this.get("timestamp");
+    return value.toString();
+  }
+
+  set timestamp(value: string) {
+    this.set("timestamp", Value.fromString(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
   }
 }
