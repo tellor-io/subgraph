@@ -20,6 +20,7 @@ import {
   Request,
   MiningEvent,
   MinerValue,
+  Supply
 } from "../generated/schema";
 
 export function handleDataRequested(event: DataRequested): void {
@@ -146,7 +147,15 @@ export function handleDisputeVoteTallied(event: DisputeVoteTallied): void {
   dispute.save();
 }
 
-export function handleNewTellorAddress(event: NewTellorAddress): void {}
+export function handleNewTellorAddress(event: NewTellorAddress): void {
+  let entity = Supply.load(event.transaction.from.toHex());
+  let contract = Tellor.bind(event.address);
+  if (entity == null) {
+    entity = new Supply(event.transaction.from.toHex());
+    entity.totalSupply = contract.totalSupply();
+    entity.timestamp = event.block.timestamp.toString();
+    entity.blockNumber = event.block.number;
+  }
 
 // contract methods
 // - contract.getRequestIdByTimestamp(...)
