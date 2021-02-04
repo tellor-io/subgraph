@@ -1,15 +1,14 @@
 import { BigInt, log } from "@graphprotocol/graph-ts";
-import { Contract, NewTellorAddress } from "../generated/Contract/Contract";
 import {
   NewDispute,
   Voted,
   DisputeVoteTallied,
-} from "../generated/Dispute/DisputeContract";
-import { GettersContract } from "../generated/Dispute/GettersContract";
+} from "../generated/Dispute/TellorMaster";
+import { TellorProxy } from "../generated/Dispute/TellorProxy";
 import {
   NewValue,
   NonceSubmitted,
-} from "../generated/LibraryEvents/LibraryContract";
+} from "../generated/Dispute/TellorMaster";
 import { Dispute, Vote, MiningEvent, MinerValue } from "../generated/schema";
 
 // event NewValue(uint256[5] _requestId, uint256 _time, uint256[5] _value, uint256 _totalTips, bytes32 indexed _currentChallenge);
@@ -56,7 +55,7 @@ export function handleNonceSubmitted(event: NonceSubmitted): void {
 }
 
 export function handleNewDispute(event: NewDispute): void {
-  let contract = GettersContract.bind(event.address);
+  let contract = TellorProxy.bind(event.address);
   let disputeVars = contract.getAllDisputeVars(event.params._disputeId);
 
   let dispute = new Dispute(event.params._disputeId.toString());
@@ -76,7 +75,7 @@ export function handleVoted(event: Voted): void {
   if (dispute === null) {
     dispute = new Dispute(event.params._disputeID.toString());
 
-    let contract = GettersContract.bind(event.address);
+    let contract = TellorProxy.bind(event.address);
     let disputeVars = contract.getAllDisputeVars(event.params._disputeID);
 
     dispute.disputeId = event.params._disputeID;
@@ -106,7 +105,7 @@ export function handleVoted(event: Voted): void {
 
 // event DisputeVoteTallied(uint256 indexed _disputeID, int256 _result, address indexed _reportedMiner, address _reportingParty, bool _active);
 export function handleDisputeVoteTallied(event: DisputeVoteTallied): void {
-  let contract = GettersContract.bind(event.address);
+  let contract = TellorProxy.bind(event.address);
   let disputeVars = contract.getAllDisputeVars(event.params._disputeID);
   let dispute = Dispute.load(event.params._disputeID.toString());
 

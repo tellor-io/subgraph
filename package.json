@@ -4,15 +4,18 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy-tellor": "node scripts/deploy-prep.js mainnet && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ themandalore/tellor-dispute-v2",
-    "deploy-main": "node scripts/deploy-prep.js mainnet && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ skuhlmann/tellor-playground",
-    "deploy-rinkeby": "node scripts/deploy-prep.js rinkeby && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ themandalore/tellor-dispute-v2-rinkeby",
+    "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ tellor-io/lens",
+    "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ tellor-io/lens-rinkeby",
     "create-local": "graph create --node http://localhost:8020/ skuhlmann/tellor-playground",
     "remove-local": "graph remove --node http://localhost:8020/ skuhlmann/tellor-playground",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 skuhlmann/tellor-playground"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.17.1",
-    "@graphprotocol/graph-ts": "0.17.0"
+    "@graphprotocol/graph-cli": "^0.17.1",
+    "@graphprotocol/graph-ts": "^0.17.0",
+    "mustache": "^4.1.0",
+    "save": "^2.4.0"
   }
 }

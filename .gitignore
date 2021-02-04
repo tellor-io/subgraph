@@ -115,3 +115,9 @@ Temporary Items
 
 
 .ops.md
+
+tmp
+build
+contracts
+generated
+subgraph.yaml

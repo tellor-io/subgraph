@@ -1,14 +1,15 @@
 specVersion: 0.0.2
+description: Tellor Lens - the oracle events
+repository: https://github.com/tellor-io/thegraph
 schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Dispute
-    network: mainnet
+    network: rinkeby
     source:
-      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
-      abi: DisputeContract
-      startBlock: 10919653
+      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      abi: TellorMaster
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -17,12 +18,10 @@ dataSources:
         - Dispute
         - Vote
       abis:
-        - name: Contract
-          file: Dispute/abis/Contract.json
-        - name: DisputeContract
-          file: Dispute/abis/TellorDispute.json
-        - name: GettersContract
-          file: Dispute/abis/TellorGetters.json
+        - name: TellorMaster
+          file: Dispute/contracts/tellorMaster/tellorMaster.json
+        - name: TellorProxy
+          file: Dispute/contracts/tellorProxy/tellorProxy.json
       eventHandlers:
         - event: NewDispute(indexed uint256,indexed uint256,uint256,address)
           handler: handleNewDispute
@@ -33,11 +32,10 @@ dataSources:
       file: Dispute/Dispute.wasm
   - kind: ethereum/contract
     name: LibraryEvents
-    network: mainnet
+    network: rinkeby
     source:
-      address: "0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5"
-      abi: LibraryContract
-      startBlock: 10919653
+      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
+      abi: TellorMaster
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -46,11 +44,12 @@ dataSources:
         - MiningEvent
         - MinerValue
       abis:
-        - name: LibraryContract
-          file: LibraryEvents/abis/TellorLibrary.json
+        - name: TellorMaster
+          file: LibraryEvents/contracts/tellorMaster/tellorMaster.json
       eventHandlers:
         - event: NewValue(uint256[5],uint256,uint256[5],uint256,indexed bytes32)
           handler: handleNewValue
-        - event: NonceSubmitted(indexed address,string,uint256[5],uint256[5],indexed bytes32)
+        - event: NonceSubmitted(indexed address,string,uint256[5],uint256[5],indexed
+            bytes32,uint256)
           handler: handleNonceSubmitted
       file: Dispute/Dispute.wasm
