@@ -8,8 +8,8 @@ dataSources:
     name: Dispute
     network: rinkeby
     source:
-      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
-      abi: TellorMaster
+      address: "0x88dF592F8eb5D7Bd38bFeF7dEb0fBc02cf3778a0"
+      abi: Tellor
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -18,10 +18,8 @@ dataSources:
         - Dispute
         - Vote
       abis:
-        - name: TellorMaster
-          file: Dispute/contracts/tellorMaster/tellorMaster.json
-        - name: TellorProxy
-          file: Dispute/contracts/tellorProxy/tellorProxy.json
+        - name: Tellor
+          file: Dispute/contracts/tellor.json
       eventHandlers:
         - event: NewDispute(indexed uint256,indexed uint256,uint256,address)
           handler: handleNewDispute
@@ -34,8 +32,8 @@ dataSources:
     name: LibraryEvents
     network: rinkeby
     source:
-      address: "0xfe41cb708cd98c5b20423433309e55b53f79134a"
-      abi: TellorMaster
+      address: "0x88dF592F8eb5D7Bd38bFeF7dEb0fBc02cf3778a0"
+      abi: Tellor
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -44,8 +42,8 @@ dataSources:
         - MiningEvent
         - MinerValue
       abis:
-        - name: TellorMaster
-          file: LibraryEvents/contracts/tellorMaster/tellorMaster.json
+        - name: Tellor
+          file: LibraryEvents/contracts/tellor.json
       eventHandlers:
         - event: NewValue(uint256[5],uint256,uint256[5],uint256,indexed bytes32)
           handler: handleNewValue

@@ -9,7 +9,7 @@ dataSources:
     network: {{network}}
     source:
       address: '{{address}}'
-      abi: TellorMaster
+      abi: Tellor
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -18,10 +18,8 @@ dataSources:
         - Dispute
         - Vote
       abis:
-        - name: TellorMaster
-          file: ./contracts/tellorMaster/tellorMaster.json
-        - name: TellorProxy
-          file: ./contracts/tellorProxy/tellorProxy.json
+        - name: Tellor
+          file: ./contracts/tellor.json
       eventHandlers:
         - event: 'NewDispute(indexed uint256,indexed uint256,uint256,address)'
           handler: handleNewDispute
@@ -37,7 +35,7 @@ dataSources:
     network: {{network}}
     source:
       address: '{{address}}'
-      abi: TellorMaster
+      abi: Tellor
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -46,8 +44,8 @@ dataSources:
         - MiningEvent
         - MinerValue
       abis:
-        - name: TellorMaster
-          file: ./contracts/tellorMaster/tellorMaster.json
+        - name: Tellor
+          file: ./contracts/tellor.json
       eventHandlers:
         - event: 'NewValue(uint256[5],uint256,uint256[5],uint256,indexed bytes32)'
           handler: handleNewValue
