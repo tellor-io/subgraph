@@ -17,6 +17,7 @@ type MinerValue @entity {
   currentChallenge: Bytes!
   miningEvent: MiningEvent
   miningEventId: String!
+  slot: BigInt!
   miner: Bytes!
   blockNumber: BigInt!
   values: [BigInt!]
@@ -46,4 +47,10 @@ type Vote @entity {
   voter: Bytes!
   voteWeight: BigInt!
   timestamp: BigInt!
+}
+
+type NetworkState @entity {
+  id: ID!
+  timestamp: BigInt!
+  difficulty: BigInt!
 }

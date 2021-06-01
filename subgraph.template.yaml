@@ -31,7 +31,7 @@ dataSources:
           handler: handleDisputeVoteTallied
       file: ./src/mapping.ts
   - kind: ethereum/contract
-    name: LibraryEvents
+    name: Network
     network: {{network}}
     source:
       address: '{{address}}'
@@ -43,10 +43,13 @@ dataSources:
       entities:
         - MiningEvent
         - MinerValue
+        - NetworkState
       abis:
         - name: Tellor
           file: ./contracts/tellor.json
       eventHandlers:
+        - event: 'NewChallenge(indexed bytes32,uint256[5],uint256,uint256)'
+          handler: handleNewChallenge
         - event: 'NewValue(uint256[5],uint256,uint256[5],uint256,indexed bytes32)'
           handler: handleNewValue
         - event: >-

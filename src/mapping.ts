@@ -1,4 +1,3 @@
-import { BigInt, log } from "@graphprotocol/graph-ts";
 import {
   Tellor,
   NewValue,
@@ -7,7 +6,11 @@ import {
   Voted,
   DisputeVoteTallied,
 } from "../generated/Dispute/Tellor";
-import { Dispute, Vote, MiningEvent, MinerValue } from "../generated/schema";
+
+import {
+  NewChallenge
+} from "../generated/Network/Tellor";
+import { Dispute, Vote, MiningEvent, MinerValue, NetworkState } from "../generated/schema";
 
 // event NewValue(uint256[5] _requestId, uint256 _time, uint256[5] _value, uint256 _totalTips, bytes32 indexed _currentChallenge);
 export function handleNewValue(event: NewValue): void {
@@ -46,6 +49,7 @@ export function handleNonceSubmitted(event: NonceSubmitted): void {
   value.miningEvent = miningEventId;
   value.miningEventId = miningEventId;
   value.miner = event.params._miner;
+  value.slot = event.params._slot;
   value.values = event.params._value;
   value.blockNumber = event.block.number;
 
@@ -110,11 +114,19 @@ export function handleDisputeVoteTallied(event: DisputeVoteTallied): void {
   dispute.result = event.params._result;
   dispute.reportedMiner = event.params._reportedMiner;
   dispute.reportingParty = event.params._reportingParty;
-  dispute.active = event.params._active;
+  dispute.active = event.params._passed;
 
   dispute.disputeVotePassed = disputeVars.value2;
   dispute.relatedMiningEventData = disputeVars.value7;
   dispute.tally = disputeVars.value8;
 
   dispute.save();
+}
+
+// event NewChallenge(bytes32 indexed _currentChallenge, uint256[5] _currentRequestId, uint256 _difficulty, uint256 _totalTips);
+export function handleNewChallenge(event: NewChallenge): void {
+  let value = new NetworkState(event.transaction.hash.toHex() + "-" + event.logIndex.toString())
+  value.difficulty = event.params._difficulty;
+  value.timestamp = event.block.timestamp;
+  value.save();
 }
