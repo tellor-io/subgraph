@@ -10,9 +10,9 @@ Deploy to mainnet
 
 `npm run prepare:mainnet && npm run deploy:mainnet`
 
-Deploy to rinkeby
+Deploy to testnet
 
-`npm run prepare:rinkeby && npm run deploy:rinkeby`
+`npm run prepare:testnet && npm run deploy:testnet`
 
 
 To run test queries:

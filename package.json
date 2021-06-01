@@ -5,9 +5,9 @@
     "codegen": "graph codegen",
     "build": "graph build",
     "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
-    "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:testnet": "mustache config/testnet.json subgraph.template.yaml > subgraph.yaml",
     "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ tellor-io/lens",
-    "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ tellor-io/lens-rinkeby"
+    "deploy:testnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ tellor-io/lens-rinkeby"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.17.1",
